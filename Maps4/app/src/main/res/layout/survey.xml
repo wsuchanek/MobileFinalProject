@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1"
+    android:onClick="placeMarker"
+    android:nestedScrollingEnabled="false">
+
+    <ImageView
+        android:layout_width="212dp"
+        android:layout_height="69dp"
+        android:id="@+id/wine_and_beer"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/alcohols"
+        android:layout_weight="0.19"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/beerorwine"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="114dp">
+
+        <RadioButton
+            android:layout_width="90dp"
+            android:layout_height="wrap_content"
+            android:text="@string/wine"
+            android:id="@+id/wine"
+            />
+
+        <RadioButton
+            android:layout_width="90dp"
+            android:layout_height="wrap_content"
+            android:text="@string/beer"
+            android:id="@+id/beer"
+            />
+    </RadioGroup>
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/barorshop"
+        android:layout_above="@+id/pname"
+        android:layout_alignStart="@+id/beerorwine"
+        android:layout_marginBottom="26dp">
+
+        <RadioButton
+            android:layout_width="90dp"
+            android:layout_height="wrap_content"
+            android:text="@string/shop"
+            android:id="@+id/shop"
+             />
+
+        <RadioButton
+            android:layout_width="90dp"
+            android:layout_height="wrap_content"
+            android:text="@string/bar"
+            android:id="@+id/bar"
+            />
+    </RadioGroup>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/borw"
+        android:id="@+id/borwTV"
+        android:textSize="20dp"
+        android:layout_below="@+id/wine_and_beer"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/bors"
+        android:id="@+id/borsTV"
+        android:textSize="20dp"
+        android:layout_above="@+id/barorshop"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/name"
+        android:id="@+id/pname"
+        android:textSize="18dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="21dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/name2"
+        android:id="@+id/lname"
+        android:textSize="18dp"
+        android:layout_alignTop="@+id/pname"
+        android:layout_toEndOf="@+id/price"
+        android:textIsSelectable="false" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/price"
+        android:id="@+id/price"
+        android:textSize="20dp"
+        android:layout_below="@+id/pnameET"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/additional"
+        android:id="@+id/additional"
+        android:layout_below="@+id/priceET"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:ems="10"
+        android:id="@+id/priceET"
+        android:editable="true"
+        android:layout_below="@+id/price"
+        android:layout_alignStart="@+id/borsTV"
+        android:layout_alignEnd="@+id/borsTV" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/pnameET"
+        android:layout_below="@+id/pname"
+        android:layout_alignStart="@+id/pname"
+        android:layout_alignEnd="@+id/pname" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/lnameET"
+        android:layout_below="@+id/lname"
+        android:layout_alignEnd="@+id/lname"
+        android:layout_toEndOf="@+id/price" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:ems="10"
+        android:id="@+id/additionalET"
+        android:layout_below="@+id/additional"
+        android:layout_alignEnd="@+id/lnameET"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="*required"
+        android:id="@+id/req"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:textColor="#ff0000" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/place"
+        android:id="@+id/savebutton"
+        android:layout_below="@+id/additionalET"
+        android:layout_centerHorizontal="true" />
+
+</RelativeLayout>

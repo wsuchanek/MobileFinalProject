@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Maps4</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="wine">Wine</string>
+    <string name="beer">Beer</string>
+    <string name="bar">Bar/Restaurant</string>
+    <string name="shop">Shop</string>
+    <string name="price">Price:</string>
+    <string name="name">Name of Product: *</string>
+    <string name="name2">Name of Location: *</string>
+    <string name="borw"> Is it Beer or Wine?*</string>
+    <string name="bors">Is it at a Bar or Shop?*</string>
+    <string name="additional">Additional Information:</string>
+    <string name="place">Place Marker</string>
+
+</resources>
