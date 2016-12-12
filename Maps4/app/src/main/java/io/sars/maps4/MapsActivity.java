@@ -1,6 +1,7 @@
 package io.sars.maps4;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.support.v4.app.ActivityCompat;
@@ -9,6 +10,7 @@ import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.widget.Toast;
+import android.view.View;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -228,6 +230,21 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMyLoca
         return false;
     }
 
+    public void addMarker(View view){
+        Intent surveyIntent = new Intent(this, SurveyActivity.class);
+        surveyIntent.putExtra("latitude", mLatitudeText);
+        surveyIntent.putExtra("longitude", mLongitudeText);
+        startActivity(surveyIntent);
+    }
 
+    public void toMenu(View view){
+
+    }
+
+
+    public void toPreference(View view){
+        Intent i = new Intent(this, MyPreferenceActivity.class);
+        startActivity(i);
+    }
 
 }

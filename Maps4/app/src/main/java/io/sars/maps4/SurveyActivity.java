@@ -1,6 +1,8 @@
 package io.sars.maps4;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.location.Location;
 import android.os.Bundle;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -8,6 +10,8 @@ import android.widget.RadioGroup;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.view.View;
+
+import com.google.android.gms.location.LocationServices;
 
 /**
  * github needs to work thanks
@@ -22,10 +26,19 @@ public class SurveyActivity extends Activity {
     private EditText priceET;
     private EditText additionalET;
 
+    private Marker marker;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.survey);
+
+        Intent intent = getIntent();
+        String latStr = intent.getStringExtra("latitude");
+        String longStr = intent.getStringExtra("longitude");
+        double lat = Double.parseDouble(latStr);
+        double longitude = Double.parseDouble(longStr);
+        marker = new Marker(lat, longitude);
 
         // TASK 4: INITIZLIZE UI OBJECTS AND VARIABLEs
         initialize();
@@ -75,10 +88,10 @@ public class SurveyActivity extends Activity {
         public void onCheckedChanged(RadioGroup rbGroup, int radioId) {
             switch (radioId) {
                 case 0x7f0b0074: // Bar button
-                    //player.setLaneRate(Player.TOP);
+                    marker.setLtype(Marker.BAR);
                     break;
                 case 0x7f0b0073: // Shop button
-                    //player.setLaneRate(Player.MID);
+                    marker.setLtype(Marker.SHOP);
                     break;
             }
         }
@@ -87,18 +100,23 @@ public class SurveyActivity extends Activity {
         public void onCheckedChanged(RadioGroup rbGroup, int radioId) {
             switch (radioId) {
                 case 0x7f0b0070: // Beer Button
-                    //player.setLaneRate(Player.TOP);
+                    marker.setPtype(Marker.BEER);
                     break;
                 case 0x7f0b006f: // Wine button
-                    //player.setLaneRate(Player.MID);
+                    marker.setPtype(Marker.WINE);
                     break;
             }
         }
     };
 
     public void placeMarker(View view){
+
+        marker.setLname(lnameET.getText().toString());
+        marker.setPname(pnameET.getText().toString());
+        marker.setAdditionalInfo(additionalET.getText().toString());
+        marker.setPrice(Double.parseDouble(priceET.getText().toString()));
+
         //code to add things to the database
-        Marker marker = new Marker(long,lat,borw.)
     }
 
 }

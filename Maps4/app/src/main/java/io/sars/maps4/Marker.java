@@ -4,6 +4,13 @@ package io.sars.maps4;
  * Created by willsuchanek on 12/10/16.
  */
 public class Marker {
+
+    static final String WINE = "Wine";
+    static final String BEER = "Beer";
+    static final String SHOP = "Shop";
+    static final String BAR = "Bar";
+
+
     double longitude;
     double latitude;
     String ptype;
@@ -13,15 +20,15 @@ public class Marker {
     double price;
     String additional;
 
-    public Marker(double lonIn, double latIn, String ptypeIn, String ltypeIn, String pnameIn, String lnameIn, double priceIn,String addIn){
-        this.longitude = lonIn;
-        this.latitude = latIn;
-        this.ptype = ptypeIn;
-        this.ltype = ltypeIn;
-        this.pname = pnameIn;
-        this.lname = lnameIn;
-        this.price = priceIn;
-        this.additional = addIn;
+    public Marker(double latIn, double longIn){
+        this.longitude = latIn;
+        this.latitude = longIn;
+        this.ptype = "";
+        this.ltype = "";
+        this.pname = "";
+        this.lname = "";
+        this.price = 0;
+        this.additional = "";
     }
 
     public double getLongitude(){
@@ -47,6 +54,33 @@ public class Marker {
     }
     public String getAdditionalInfo(){
         return additional;
+    }
+
+    public void setLongitude(double in){
+        longitude = in;
+    }
+    public void setLatitude(double in){
+
+        latitude = in;
+    }
+    public void setPrice(double in){
+        price = in;
+    }
+    public void setPtype(String in){
+
+        ptype = in;
+    }
+    public void setLtype(String in){
+        ltype = in;
+    }
+    public void setPname(String in){
+        pname = in;
+    }
+    public void setLname(String in){
+        lname= in;
+    }
+    public void setAdditionalInfo(String in){
+        additional = in;
     }
 
 }
