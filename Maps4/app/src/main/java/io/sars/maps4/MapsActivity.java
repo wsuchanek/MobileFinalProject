@@ -238,7 +238,8 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMyLoca
     }
 
     public void toMenu(View view){
-
+        //Intent i = new Intent(this, MenuActivity.class);
+        //startActivity(i);
     }
 
 
