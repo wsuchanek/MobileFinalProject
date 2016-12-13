@@ -10,7 +10,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="right|top"
+        android:layout_gravity="center|top"
         android:text="Menu"
         android:onClick="toMenu"
         android:padding="10dp"
@@ -23,7 +23,7 @@
         android:layout_gravity="left|top"
         android:text="Add Marker"
         android:padding="10dp"
-        android:onClick="addMarker"
+        android:onClick="putMarker"
         android:layout_marginTop="20dp"
         android:layout_marginLeft="20dp"
         android:paddingRight="10dp"/>

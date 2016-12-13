@@ -38,6 +38,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".SurveyActivity"
+            android:label="Survey">
+        </activity>
+        <activity
+            android:name=".MenuActivity"
+            android:label="Menu">
+        </activity>
+        <activity
+            android:name=".AboutActivity"
+            android:label="@string/about">
+        </activity>
+        <activity android:name=".MyPreferenceActivity" />
     </application>
 
 </manifest>

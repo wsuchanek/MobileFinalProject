@@ -10,6 +10,7 @@ import android.widget.RadioGroup;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.android.gms.location.LocationServices;
 
@@ -45,7 +46,10 @@ public class SurveyActivity extends Activity {
 
         // TASK 5: REGISTER CHANGE LISTENERS
         registerChangeListener();
-
+        lnameET.setText("");
+        pnameET.setText("");
+        additionalET.setText("");
+        priceET.setText("0");
     }
 
     /*************************************************************************************************
@@ -87,10 +91,10 @@ public class SurveyActivity extends Activity {
     private RadioGroup.OnCheckedChangeListener borsListener = new RadioGroup.OnCheckedChangeListener() {
         public void onCheckedChanged(RadioGroup rbGroup, int radioId) {
             switch (radioId) {
-                case 0x7f0b0074: // Bar button
+                case R.id.bar: // Bar button
                     marker.setLtype(Marker.BAR);
                     break;
-                case 0x7f0b0073: // Shop button
+                case R.id.shop: // Shop button
                     marker.setLtype(Marker.SHOP);
                     break;
             }
@@ -99,10 +103,10 @@ public class SurveyActivity extends Activity {
     private RadioGroup.OnCheckedChangeListener borwListener = new RadioGroup.OnCheckedChangeListener() {
         public void onCheckedChanged(RadioGroup rbGroup, int radioId) {
             switch (radioId) {
-                case 0x7f0b0070: // Beer Button
+                case R.id.beer: // Beer Button
                     marker.setPtype(Marker.BEER);
                     break;
-                case 0x7f0b006f: // Wine button
+                case R.id.wine: // Wine button
                     marker.setPtype(Marker.WINE);
                     break;
             }
@@ -110,13 +114,20 @@ public class SurveyActivity extends Activity {
     };
 
     public void placeMarker(View view){
-
         marker.setLname(lnameET.getText().toString());
         marker.setPname(pnameET.getText().toString());
         marker.setAdditionalInfo(additionalET.getText().toString());
         marker.setPrice(Double.parseDouble(priceET.getText().toString()));
+        //Toast.makeText(this, marker.getLname()+" "+marker.getPname()+" "+marker.getPtype()+" "+marker.getLtype(), Toast.LENGTH_LONG).show();
 
-        //code to add things to the database
+        if (marker.getLname() != "" && marker.getPname() != "" && marker.getPtype() != "" && marker.getLtype() != "") {
+            Toast.makeText(this, "Adding to database.", Toast.LENGTH_LONG).show();
+            //code to add things to the database
+            finish();
+        }
+        else {
+            Toast.makeText(this, "You did not fill out a required field.", Toast.LENGTH_LONG).show();
+
+        }
     }
-
 }
