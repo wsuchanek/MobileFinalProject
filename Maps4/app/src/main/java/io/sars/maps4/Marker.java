@@ -9,6 +9,7 @@ public class Marker {
     static final String BEER = "Beer";
     static final String SHOP = "Shop";
     static final String BAR = "Bar";
+    static final String NOTSELECTED = "None Specified";
 
 
     double longitude;
@@ -19,16 +20,19 @@ public class Marker {
     String lname;
     double price;
     String additional;
+    static long rowID;
 
-    public Marker(double latIn, double longIn){
+
+    public Marker(double latIn, double longIn, int rowID){
         this.longitude = latIn;
         this.latitude = longIn;
-        this.ptype = "";
-        this.ltype = "";
-        this.pname = "";
-        this.lname = "";
-        this.price = 0;
-        this.additional = "";
+        this.ptype = this.NOTSELECTED;
+        this.ltype = this.NOTSELECTED;
+        this.pname = this.NOTSELECTED;
+        this.lname = this.NOTSELECTED;
+        this.price = -1.00;
+        this.additional = this.NOTSELECTED;
+        this.rowID = rowID;
     }
 
     public double getLongitude(){
@@ -55,6 +59,7 @@ public class Marker {
     public String getAdditionalInfo(){
         return additional;
     }
+    public long getRowID() { return this.rowID;}
 
     public void setLongitude(double in){
         longitude = in;

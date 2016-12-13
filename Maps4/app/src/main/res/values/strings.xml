@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Maps4</string>
     <string name="title_activity_maps">Map</string>
+    <string name="title_activity_survey">Survey</string>
+
     <string name="wine">Wine</string>
     <string name="beer">Beer</string>
     <string name="bar">Bar/Restaurant</string>
