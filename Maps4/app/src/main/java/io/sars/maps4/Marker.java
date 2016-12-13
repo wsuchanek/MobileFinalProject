@@ -24,12 +24,12 @@ public class Marker {
 
 
     public Marker(double latIn, double longIn, int rowID){
-        this.longitude = latIn;
-        this.latitude = longIn;
-        this.ptype = this.NOTSELECTED;
-        this.ltype = this.NOTSELECTED;
-        this.pname = this.NOTSELECTED;
-        this.lname = this.NOTSELECTED;
+        this.longitude = longIn;
+        this.latitude = latIn;
+        this.ptype = "";//this.NOTSELECTED;
+        this.ltype = "";//this.NOTSELECTED;
+        this.pname = "";//this.NOTSELECTED;
+        this.lname = "";//this.NOTSELECTED;
         this.price = -1.00;
         this.additional = this.NOTSELECTED;
         this.rowID = rowID;

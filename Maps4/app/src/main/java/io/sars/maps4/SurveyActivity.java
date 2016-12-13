@@ -1,20 +1,14 @@
 package io.sars.maps4;
 
 import android.app.Activity;
-import android.content.Intent;
-import android.location.Location;
 import android.os.Bundle;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioGroup;
-import android.widget.SeekBar;
-import android.widget.TextView;
 import android.view.View;
 import android.widget.Toast;
+import android.content.Intent;
 
 import android.database.Cursor;
-
-import com.google.android.gms.location.LocationServices;
 
 /**
  * github needs to work thanks
@@ -22,8 +16,8 @@ import com.google.android.gms.location.LocationServices;
  */
 public class SurveyActivity extends Activity {
 
-    private RadioGroup bors;
-    private RadioGroup borw;
+    private RadioGroup ltypeRG;
+    private RadioGroup ptypeRG;
     private EditText lnameET;
     private EditText pnameET;
     private EditText priceET;
@@ -39,13 +33,13 @@ public class SurveyActivity extends Activity {
         database = new DBAdapter(this);
 
 
-        /*Intent intent = getIntent();
+        Intent intent = getIntent();
         String latStr = intent.getStringExtra("latitude");
         String longStr = intent.getStringExtra("longitude");
         double lat = Double.parseDouble(latStr);
-        double longitude = Double.parseDouble(longStr);*/
+        double longitude = Double.parseDouble(longStr);
         int profile_counts = database.getProfilesCount(); //Get current number of things in the table and give this marker the next row
-        marker = new Marker(11.11, 99.99, profile_counts);
+        marker = new Marker(lat, longitude, profile_counts+1);
 
         // TASK 4: INITIZLIZE UI OBJECTS AND VARIABLEs
         initialize();
@@ -64,20 +58,18 @@ public class SurveyActivity extends Activity {
      * Output: none
      * Global Constants: none?
      *
-     * Variables used: bors borw lnameET pnameET priceET additonalET
+     * Variables used: ltypeRG ptypeRG lnameET pnameET priceET additonalET
      *
      * Last Modified: 11/2/16
      *************************************************************************************************/
     private void initialize() {
         // TASK 5: GET REFERENCE TO EACH OF THE UI COMPONENTS
-        bors = (RadioGroup) findViewById(R.id.barorshop);
-        borw = (RadioGroup) findViewById(R.id.beerorwine);
+        ltypeRG = (RadioGroup) findViewById(R.id.barorshop);
+        ptypeRG = (RadioGroup) findViewById(R.id.beerorwine);
         lnameET = (EditText) findViewById(R.id.lnameET);
         pnameET = (EditText) findViewById(R.id.pnameET);
         priceET = (EditText) findViewById(R.id.priceET);
         additionalET = (EditText) findViewById(R.id.additionalET);
-
-        registerChangeListener();
     }
 
     /*************************************************************************************************
@@ -91,8 +83,8 @@ public class SurveyActivity extends Activity {
      * Last Modified: 11/2/16
      *************************************************************************************************/
     private void registerChangeListener() {
-        bors.setOnCheckedChangeListener(borsListener);
-        borw.setOnCheckedChangeListener(borwListener);
+        ltypeRG.setOnCheckedChangeListener(borsListener);
+        ptypeRG.setOnCheckedChangeListener(borwListener);
     }
 
     //Is this marker for a bar or a shop?
@@ -131,9 +123,9 @@ public class SurveyActivity extends Activity {
         marker.setPrice(Double.parseDouble(priceET.getText().toString()));
 
 
-        
 
 
+        Toast.makeText(this, marker.getPname()+"|"+marker.getLname()+"|"+marker.getPtype()+"|"+marker.getLtype(), Toast.LENGTH_LONG).show();
         if (marker.getLname() != "" && marker.getPname() != "" && marker.getPtype() != "" && marker.getLtype() != "") {
             Toast.makeText(this, "Adding to database.", Toast.LENGTH_LONG).show();
             

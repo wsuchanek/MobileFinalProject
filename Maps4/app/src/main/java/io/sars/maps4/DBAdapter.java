@@ -28,7 +28,7 @@ public class DBAdapter {
 
     private static final String DATABASE_NAME = "beverages";
     private static final String DATABASE_TABLE = "products";
-    private static int DATABASE_VERSION = 3;
+    private static int DATABASE_VERSION = 1;
 
     private static final String DATABASE_CREATE =
             "create table products (_id integer primary key autoincrement, "
@@ -89,8 +89,8 @@ public class DBAdapter {
         ContentValues initialValues = new ContentValues();
         initialValues.put(KEY_PRODUCTNAME, productname);
         initialValues.put(KEY_TYPE, type);
-        initialValues.put(KEY_LOCATIONTYPE, locationtype);
         initialValues.put(KEY_LOCATIONNAME, locationname);
+        initialValues.put(KEY_LOCATIONTYPE, locationtype);
         initialValues.put(KEY_PRICE, price);
         initialValues.put(KEY_LATITUDE, latitude);
         initialValues.put(KEY_LONGITUDE, longitude);
@@ -112,8 +112,8 @@ public class DBAdapter {
                         KEY_ROWID,
                         KEY_PRODUCTNAME,
                         KEY_TYPE,
-                        KEY_LOCATIONTYPE,
                         KEY_LOCATIONNAME,
+                        KEY_LOCATIONTYPE,
                         KEY_PRICE,
                         KEY_LATITUDE,
                         KEY_LONGITUDE,
@@ -135,8 +135,8 @@ public class DBAdapter {
                 db.query(DATABASE_TABLE, new String[] {
                         KEY_PRODUCTNAME,
                         KEY_TYPE,
-                        KEY_LOCATIONTYPE,
                         KEY_LOCATIONNAME,
+                        KEY_LOCATIONTYPE,
                         KEY_PRICE,
                         KEY_LATITUDE,
                         KEY_LONGITUDE,
@@ -162,8 +162,8 @@ public class DBAdapter {
         ContentValues args = new ContentValues();
         args.put(KEY_PRODUCTNAME, productname);
         args.put(KEY_TYPE, type);
-        args.put(KEY_LOCATIONTYPE, locationtype);
         args.put(KEY_LOCATIONNAME, locationname);
+        args.put(KEY_LOCATIONTYPE, locationtype);
         args.put(KEY_PRICE, price);
         args.put(KEY_LATITUDE, latitude);
         args.put(KEY_LONGITUDE, longitude);
