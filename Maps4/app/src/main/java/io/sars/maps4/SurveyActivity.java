@@ -11,8 +11,8 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.view.View;
 import android.widget.Toast;
-import android.database.Cursor;
 
+import android.database.Cursor;
 
 import com.google.android.gms.location.LocationServices;
 
@@ -52,7 +52,10 @@ public class SurveyActivity extends Activity {
 
         // TASK 5: REGISTER CHANGE LISTENERS
         registerChangeListener();
-
+        lnameET.setText("");
+        pnameET.setText("");
+        additionalET.setText("");
+        priceET.setText("0");
     }
 
     /*************************************************************************************************
@@ -122,46 +125,46 @@ public class SurveyActivity extends Activity {
 
     //Put marker on the map
     public void placeMarker(View view){
-
         marker.setLname(lnameET.getText().toString());
         marker.setPname(pnameET.getText().toString());
         marker.setAdditionalInfo(additionalET.getText().toString());
+        marker.setPrice(Double.parseDouble(priceET.getText().toString()));
 
-        try {
-            marker.setPrice(Double.parseDouble(priceET.getText().toString()));
 
+        
+
+
+        if (marker.getLname() != "" && marker.getPname() != "" && marker.getPtype() != "" && marker.getLtype() != "") {
+            Toast.makeText(this, "Adding to database.", Toast.LENGTH_LONG).show();
+            
+            database.open(); //open the database
+            long id;
+            id = database.insertProduct( //Insert the current information into the database
+                    marker.pname,
+                    marker.ptype,
+                    marker.lname,
+                    marker.ltype,
+                    marker.price,
+                    marker.latitude,
+                    marker.longitude,
+                    marker.additional
+
+                    );
+
+            //---retrieve the same title to verify---
+            Cursor c = database.getProduct(marker.getRowID());
+            if (c.moveToFirst())
+              displayProduct(c);
+            else
+                Toast.makeText(this, "No title found",Toast.LENGTH_LONG).show();
+            //-------------------
+            database.close(); //Close it once information has been entered
+            c.close();
+            finish();
         }
-        catch (Exception e) {
-            marker.setPrice(0.00);
+        else {
+            Toast.makeText(this, "You did not fill out a required field.", Toast.LENGTH_LONG).show();
         }
-
-
-        database.open(); //open the database
-        long id;
-        id = database.insertProduct( //Insert the current information into the database
-                marker.pname,
-                marker.ptype,
-                marker.lname,
-                marker.ltype,
-                marker.price,
-                marker.latitude,
-                marker.longitude,
-                marker.additional
-
-                );
-
-        //---retrieve the same title to verify---
-        Cursor c = database.getProduct(marker.getRowID());
-        if (c.moveToFirst())
-            displayProduct(c);
-        else
-            Toast.makeText(this, "No title found",
-                    Toast.LENGTH_LONG).show();
-        //-------------------
-        database.close(); //Close it once information has been entered
-        c.close();
-
-        //code to add things to the database
     }
 
     public void displayProduct(Cursor c)

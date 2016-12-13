@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:layout_width="175dp"
+        android:layout_height="60dp"
+        android:text="Add Marker at Current Location"
+        android:onClick="toSurvey"
+        android:id="@+id/button"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentEnd="false" />
+
+    <Button
+        android:layout_width="175dp"
+        android:layout_height="60dp"
+        android:text="Show Nearby in List"
+        android:id="@+id/button2"
+        android:onClick="toListView"
+        android:layout_above="@+id/button"
+        android:layout_centerHorizontal="true"
+        android:singleLine="false" />
+
+    <Button
+        android:layout_width="175dp"
+        android:layout_height="60dp"
+        android:text="About"
+        android:onClick="toAbout"
+        android:id="@+id/button3"
+        android:layout_below="@+id/button"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btmap"
+        android:id="@+id/button5"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="55dp"
+        android:onClick="goBacktoMap" />
+</RelativeLayout>

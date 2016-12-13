@@ -230,7 +230,7 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMyLoca
         return false;
     }
 
-    public void addMarker(View view){
+    public void putMarker(View view){
         Intent surveyIntent = new Intent(this, SurveyActivity.class);
         surveyIntent.putExtra("latitude", mLatitudeText);
         surveyIntent.putExtra("longitude", mLongitudeText);
@@ -238,8 +238,10 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMyLoca
     }
 
     public void toMenu(View view){
-        //Intent i = new Intent(this, MenuActivity.class);
-        //startActivity(i);
+        Intent menuIntent = new Intent(this, MenuActivity.class);
+        menuIntent.putExtra("latitude", mLatitudeText);
+        menuIntent.putExtra("longitude", mLongitudeText);
+        startActivity(menuIntent);
     }
 
 
