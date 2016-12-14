@@ -339,8 +339,8 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMyLoca
                                 "Product Type: " + c.getString(1) + "\n" +
                                 "Location Name: " + c.getString(2) + "\n" +
                                 "Location Type:  " + c.getString(3) + "\n";
-                        if (c.getDouble(4)!= -1.00){title+="Price: "+ Double.toString(c.getDouble(4))+ "\n";}
-                        if (!c.getString(7).equals("")){title+="Additional Info: \n"+c.getString(7);}
+                        if (c.getDouble(4)!= -1.00){title=title+"Price: "+ Double.toString(c.getDouble(4))+ "\n";}
+                        if (!c.getString(7).equals("")){title=title+"Additional Info: \n"+c.getString(7);}
 
                         mMap.addMarker(new MarkerOptions().position(myLoc).title(c.getString(0)).snippet(title));
                     }
@@ -353,8 +353,8 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMyLoca
                                 "Product Type: " + c.getString(1) + "\n" +
                                 "Location Name: " + c.getString(2) + "\n" +
                                 "Location Type:  " + c.getString(3) + "\n";
-                        if (c.getDouble(4)!= -1.00){title+="Price: "+ Double.toString(c.getDouble(4))+ "\n";}
-                        if (!c.getString(7).equals("")){title+="Additional Info: \n"+c.getString(7);}
+                        if (c.getDouble(4)!= -1.00){title=title+"Price: "+ Double.toString(c.getDouble(4))+ "\n";}
+                        if (!c.getString(7).equals("")){title=title+"Additional Info: \n"+c.getString(7);}
 
                         mMap.addMarker(new MarkerOptions().position(myLoc).title(c.getString(0)).snippet(title));
 
@@ -367,8 +367,8 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMyLoca
                             "Product Type: " + c.getString(1) + "\n" +
                             "Location Name: " + c.getString(2) + "\n" +
                             "Location Type:  " + c.getString(3) + "\n";
-                    if (c.getDouble(4)!= -1.00){title+="Price: "+ Double.toString(c.getDouble(4))+ "\n";}
-                    if (!c.getString(7).equals("")){title+="Additional Info: \n"+c.getString(7);}
+                    if (c.getDouble(4)!= -1.00){title=title+"Price: "+ Double.toString(c.getDouble(4))+ "\n";}
+                    if (!c.getString(7).equals("")){title=title+"Additional Info: \n"+c.getString(7);}
 
                     mMap.addMarker(new MarkerOptions().position(myLoc).title(c.getString(0)).snippet(title));
                 }
@@ -396,8 +396,8 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMyLoca
                                 "Product Type: " + c.getString(1) + "\n" +
                                 "Location Name: " + c.getString(2) + "\n" +
                                 "Location Type:  " + c.getString(3) + "\n";
-                        if (c.getDouble(4)!= -1.00){title+="Price: "+ Double.toString(c.getDouble(4))+ "\n";}
-                        if (!c.getString(7).equals("")){title+="Additional Info: \n"+c.getString(7);}
+                        if (c.getDouble(4)!= -1.00){title=title+"Price: "+ Double.toString(c.getDouble(4))+ "\n";}
+                        if (!c.getString(7).equals("")){title=title+"Additional Info: \n"+c.getString(7);}
 
                         mMap.addMarker(new MarkerOptions().position(myLoc).title(c.getString(0)).snippet(title));
                     }
@@ -410,8 +410,8 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMyLoca
                                 "Product Type: " + c.getString(1) + "\n" +
                                 "Location Name: " + c.getString(2) + "\n" +
                                 "Location Type:  " + c.getString(3) + "\n";
-                        if (c.getDouble(4)!= -1.00){title+="Price: "+ Double.toString(c.getDouble(4))+ "\n";}
-                        if (!c.getString(7).equals("")){title+="Additional Info: \n"+c.getString(7);}
+                        if (c.getDouble(4)!= -1.00){title=title+"Price: "+ Double.toString(c.getDouble(4))+ "\n";}
+                        if (!c.getString(7).equals("")){title=title+"Additional Info: \n"+c.getString(7);}
 
                         mMap.addMarker(new MarkerOptions().position(myLoc).title(c.getString(0)).snippet(title));
 
@@ -424,8 +424,8 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMyLoca
                             "Product Type: " + c.getString(1) + "\n" +
                             "Location Name: " + c.getString(2) + "\n" +
                             "Location Type:  " + c.getString(3) + "\n";
-                    if (c.getDouble(4)!= -1.00){title+="Price: "+ Double.toString(c.getDouble(4))+ "\n";}
-                    if (!c.getString(7).equals("")){title+="Additional Info: \n"+c.getString(7);}
+                    if (c.getDouble(4)!= -1.00){title=title+"Price: "+ Double.toString(c.getDouble(4))+ "\n";}
+                    if (!c.getString(7).equals("")){title=title+"Additional Info: \n"+c.getString(7);}
 
                     mMap.addMarker(new MarkerOptions().position(myLoc).title(c.getString(0)).snippet(title));
                 }
