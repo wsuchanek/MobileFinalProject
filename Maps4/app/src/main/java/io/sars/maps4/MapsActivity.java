@@ -27,6 +27,23 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
 
+/*************************************************************************************************
+ * File:   MapsActivity.java
+ * Author: Nicole Lane, Will Suchanek
+ *
+ *
+ * Purpose: This activity allows the user to add markers for beverages that they have purchased at their current location (with information about the product).
+ * It also allows the user to access a main menu.
+ *
+ * Algorithm:
+ *      If user taps menu button, start menu activity.
+ *      If user taps add marker, start Survey Activity.
+ *      If user taps update map, make sure all markers are currently up to date.
+ *      If user taps preferencecs, start preference activity.
+ *      Allow user to scroll on the map and see all markers currently placed.
+ *
+ *************************************************************************************************/
+
 public class MapsActivity extends FragmentActivity implements GoogleMap.OnMyLocationButtonClickListener,
         OnMapReadyCallback, GoogleMap.OnMapClickListener,
         ActivityCompat.OnRequestPermissionsResultCallback,
@@ -258,6 +275,7 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMyLoca
         return false;
     }
 
+    //Get current latitude and longitude and send to survey activity; linked to add marker button
     public void putMarker(View view){
         Intent surveyIntent = new Intent(this, SurveyActivity.class);
         surveyIntent.putExtra("latitude", mLatitudeText);
@@ -265,6 +283,7 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMyLoca
         startActivity(surveyIntent);
     }
 
+    //Go to menu activity; linked to menu button
     public void toMenu(View view){
         Intent menuIntent = new Intent(this, MenuActivity.class);
         menuIntent.putExtra("latitude", mLatitudeText);
@@ -272,13 +291,14 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMyLoca
         startActivity(menuIntent);
     }
 
-
+    //Go to preferences; linked to preferences button
     public void toPreference(View view){
         Intent i = new Intent(this, MyPreferenceActivity.class);
         startActivity(i);
 
     }
 
+    //Initialize map with current entries in the database
     public void setMap(View view){
         mMap.clear();
         SharedPreferences SP = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
@@ -293,33 +313,16 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMyLoca
         } else{
             displayWine(ltypePref);
         }
-        /* This is now called in functions to filter what is displayed
-        for (int n = 1; n <= totalProducts; n++) {
-            Cursor c = database.getProduct(n);
-
-
-
-            //Toast.makeText(this, Double.toString(c.getDouble(5)), Toast.LENGTH_SHORT).show();
-            LatLng myLoc = new LatLng(c.getDouble(5), c.getDouble(6));
-            String title = "product type: " + c.getString(1) + "\n" +
-                    "location name: " + c.getString(2) + "\n" +
-                    "location type:  " + c.getString(3) + "\n";
-            if (c.getDouble(4)!= -1.00){
-                title+="Price: "+ Double.toString(c.getDouble(4))+ "\n";
-            }
-            if (c.getString(7).equals("") == false){
-                title+="Additional Info: \n"+c.getString(7);
-            }
-            //Toast.makeText(this, title, Toast.LENGTH_SHORT).show();
-            mMap.addMarker(new MarkerOptions().position(myLoc).title(c.getString(0)).snippet(title));
-        }*/
     }
 
+    //Show all current entries in the database on the map
     public void displayAll(String ltp){
         Toast.makeText(this, "Display All", Toast.LENGTH_SHORT).show();
         displayBeer(ltp);
         displayWine(ltp);
     }
+
+    //Filter through all entries in the database and only display entries with "beer" as their TYPE.
     public void displayBeer(String ltp){
         database = new DBAdapter(this);
         database.open();
@@ -374,6 +377,7 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMyLoca
         database.close();
     }
 
+    //Filter through all entries in the database, and only display those with "wine" in their TYPE field.
     public void displayWine(String ltp){
         database = new DBAdapter(this);
         database.open();
@@ -431,7 +435,7 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMyLoca
     }
 
     @Override
-    public boolean onMarkerClick(com.google.android.gms.maps.model.Marker marker) {
+    public boolean onMarkerClick(com.google.android.gms.maps.model.Marker marker) { //Display a toast when the user taps on a marker
         String toToast = marker.getSnippet();
         Toast.makeText(this, toToast, Toast.LENGTH_LONG).show();
         return false;
