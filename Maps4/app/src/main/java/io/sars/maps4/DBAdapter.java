@@ -9,10 +9,19 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 import android.widget.Toast;
 
-
+/*************************************************************************************************
+ * File:   DBAdapter.java
+ * Author: Nicole Lane, Will Suchanek
+ *
+ * Purpose: This file is for the creation and manipulation of a SQLite Database. This database stores information about
+ * beverages purchased by the user--product name and type, location purchased name and type, price, extra information, and latitude/longitide.
+ *
+ *
+ *
+ *************************************************************************************************/
 public class DBAdapter {
 
-    public static final String KEY_ROWID = "_id";
+    public static final String KEY_ROWID = "_id"; //ID number
     public static final String KEY_PRODUCTNAME = "productname"; //name of beverage
     public static final String KEY_TYPE = "type"; //Either beer or wine
     public static final String KEY_LOCATIONTYPE = "locationtype"; //Bar or shop
@@ -22,26 +31,26 @@ public class DBAdapter {
 
     public static final String KEY_LATITUDE = "latitude";
     public static final String KEY_LONGITUDE = "longitude";
-    public static final String KEY_EXTRAS = "extras";
+    public static final String KEY_EXTRAS = "extras"; //additional information about the drink
 
     private static final String TAG = "DBAdapter";
 
-    private static final String DATABASE_NAME = "beverages";
-    private static final String DATABASE_TABLE = "products";
+    private static final String DATABASE_NAME = "beverages"; //name of the database itself
+    private static final String DATABASE_TABLE = "products"; //the name of the table in beverages
 
-    private static int DATABASE_VERSION = 2;
+    private static int DATABASE_VERSION = 2; //make sure that this gets changed any time information about the database gets changed
 
-    private static final String DATABASE_CREATE =
+    private static final String DATABASE_CREATE = //Determine format of database
             "create table products (_id integer primary key autoincrement, "
                     + "productname text not null, locationtype text not null, locationname text not null, type text not null, " +
                     "price double not null, latitude double not null, longitude double not null, extras text not null);";
 
-    private final Context context;
+    private final Context context; //Context this database is being used in
 
     private DatabaseHelper DBHelper;
     private SQLiteDatabase db;
 
-    public DBAdapter(Context ctx)
+    public DBAdapter(Context ctx) //Create the database helper within the context it's being used in
     {
         this.context = ctx;
         DBHelper = new DatabaseHelper(context);
@@ -61,7 +70,7 @@ public class DBAdapter {
         }
 
         @Override
-        public void onUpgrade(SQLiteDatabase db, int oldVersion,
+        public void onUpgrade(SQLiteDatabase db, int oldVersion, //Upgrade database from previous version
                               int newVersion)
         {
             Log.w(TAG, "Upgrading database from version " + oldVersion
@@ -84,7 +93,7 @@ public class DBAdapter {
         DBHelper.close();
     }
 
-    //---insert a product into the database---
+    //---insert a product into the database.
     public long insertProduct(String productname, String type, String locationname, String locationtype, double price, double latitude, double longitude, String extras)
     {
         ContentValues initialValues = new ContentValues();
@@ -100,7 +109,7 @@ public class DBAdapter {
         return db.insert(DATABASE_TABLE, null, initialValues);
     }
 
-    //---deletes a particular product---
+    //---deletes a particular product by its row ID
     public boolean deleteProduct(long rowID)
     {
         return db.delete(DATABASE_TABLE, KEY_ROWID + "=" + rowID, null) > 0;

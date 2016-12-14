@@ -1,8 +1,14 @@
 package io.sars.maps4;
 
-/**
- * Created by willsuchanek on 12/10/16.
- */
+
+ /*************************************************************************************************
+ * File:   Marker.java
+ * Author: Nicole Lane, Will Suchanek
+ * Purpose: This object holds all information about the marker currently being set.
+ *
+ *
+ *************************************************************************************************/
+
 public class Marker {
 
     static final String WINE = "Wine";
@@ -12,29 +18,30 @@ public class Marker {
     static final String NOTSELECTED = "None Specified";
 
 
-    double longitude;
+    double longitude; //Get latitude and longitude from map activity (user's current location)
     double latitude;
-    String ptype;
-    String ltype;
-    String pname;
-    String lname;
-    double price;
-    String additional;
-    static long rowID;
+    String ptype; //Type of product; either beer or wine
+    String ltype; //Location type; either bar or shop
+    String pname; //Product name; string entered by the user
+    String lname; //Location name; where the product was purchased
+    double price; //The price of the beverage; optional
+    String additional; //An extra information about the beverage; optional
+    static long rowID; //This marker's rowID in the database
 
 
+     //Initialize all values to default upon creation
     public Marker(double latIn, double longIn, int rowID){
         this.longitude = longIn;
         this.latitude = latIn;
-        this.ptype = "";//this.NOTSELECTED;
-        this.ltype = "";//this.NOTSELECTED;
-        this.pname = "";//this.NOTSELECTED;
-        this.lname = "";//this.NOTSELECTED;
+        this.ptype = "";
+        this.ltype = "";
+        this.pname = "";
+        this.lname = "";
         this.price = -1.00;
         this.additional = this.NOTSELECTED;
         this.rowID = rowID;
     }
-
+    //All getters for data members
     public double getLongitude(){
         return longitude;
     }
@@ -61,6 +68,8 @@ public class Marker {
     }
     public long getRowID() { return this.rowID;}
 
+
+     //All setters for data members
     public void setLongitude(double in){
         longitude = in;
     }
