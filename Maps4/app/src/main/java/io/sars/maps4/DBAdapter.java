@@ -28,7 +28,8 @@ public class DBAdapter {
 
     private static final String DATABASE_NAME = "beverages";
     private static final String DATABASE_TABLE = "products";
-    private static int DATABASE_VERSION = 12;
+
+    private static int DATABASE_VERSION = 2;
 
     private static final String DATABASE_CREATE =
             "create table products (_id integer primary key autoincrement, "

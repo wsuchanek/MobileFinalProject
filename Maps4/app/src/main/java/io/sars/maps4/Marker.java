@@ -69,7 +69,9 @@ public class Marker {
         latitude = in;
     }
     public void setPrice(double in){
-        price = in;
+        if(in > 0){
+            price = in;
+        }
     }
     public void setPtype(String in){
 

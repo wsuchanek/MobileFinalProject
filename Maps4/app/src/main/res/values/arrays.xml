@@ -1,12 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--Color array-->
     <string-array name="listArray">
-        <item>Green</item>
-        <item>Blue</item>
         <item>White</item>
+        <item>Blue</item>
+        <item>Green</item>
     </string-array>
 
     <string-array name="listValues">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+    <!--ptype array-->
+    <string-array name="ptypeArray">
+        <item>Beer and Wine</item>
+        <item>Beer Only</item>
+        <item>Wine Only</item>
+    </string-array>
+
+    <string-array name="ptypeValues">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+    <!--ltype array-->
+    <string-array name="ltypeArray">
+        <item>Bar and Shop</item>
+        <item>Bar Only</item>
+        <item>Shop Only</item>
+    </string-array>
+
+    <string-array name="ltypeValues">
         <item>1</item>
         <item>2</item>
         <item>3</item>

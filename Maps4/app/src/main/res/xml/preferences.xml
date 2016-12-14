@@ -13,4 +13,18 @@
         android:defaultValue="1"
         android:entries="@array/listArray"
         android:entryValues="@array/listValues" />
+    <ListPreference
+        android:title="Set Location Type Preference"
+        android:summary="Select the type of location you want to appear on the map"
+        android:key="ltypePref"
+        android:defaultValue="1"
+        android:entries="@array/ptypeArray"
+        android:entryValues="@array/ptypeValues" />
+    <ListPreference
+        android:title="Set Product Type Preference"
+        android:summary="Select the type of alcohol you want to appear on the map"
+        android:key="ptypePref"
+        android:defaultValue="1"
+        android:entries="@array/ltypeArray"
+        android:entryValues="@array/ltypeValues" />
 </PreferenceScreen>
