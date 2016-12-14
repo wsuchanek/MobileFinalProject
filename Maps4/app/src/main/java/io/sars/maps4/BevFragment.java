@@ -18,9 +18,21 @@ import java.util.List;
 import android.database.Cursor;
 
 
-/**
- * Created by NicoleLane on 12/13/16.
- */
+/*************************************************************************************************
+ * File:   BevFragment.java
+ * Author: Nicole Lane, Will Suchanek
+ *
+ * Purpose:
+ *
+ * This file creates a fragment that gets displayed in the ListActivity.java file. It creates an arrayList of all information stored in the database by the user,
+ * and puts them into an arrayList adapter. This adapter then gets displayed in the listView in the ListActivity.
+ *
+ * Algorithm:
+ *      Get strings about database information from markerList class.
+ *      Put those into an arrayList.
+ *      Put all entries in the arrayList into a scrollable listView.
+ *
+ *************************************************************************************************/
 
 public class BevFragment extends Fragment {
     MarkerList markerlist;
@@ -36,7 +48,6 @@ public class BevFragment extends Fragment {
         markerlist = new MarkerList(getActivity());
         info = markerlist.data;
 
-        String[] testInfo = {"please", "tell", "me", "this", "works"};
         List<String> productInfo = new ArrayList<String>(Arrays.asList(info));
 
         // Now that we have some dummy forecast data, create an ArrayAdapter.
@@ -50,8 +61,6 @@ public class BevFragment extends Fragment {
                         productInfo);
 
         View rootView = inflater.inflate(R.layout.fragment_layout, container, false);
-
-        Log.d("ADAPTER", "after adapter");
 
         // Get a reference to the ListView, and attach this adapter to it.
         ListView listView = (ListView) rootView.findViewById(R.id.bev_listview);

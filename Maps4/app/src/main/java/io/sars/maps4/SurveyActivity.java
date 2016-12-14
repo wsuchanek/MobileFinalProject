@@ -13,10 +13,19 @@ import android.content.Intent;
 
 import android.database.Cursor;
 
-/**
- * github needs to work thanks
- * Created by willsuchanek on 12/10/16.
- */
+/*************************************************************************************************
+ * File:   SurveyActivity.java
+ * Author: Nicole Lane, Will Suchanek
+ *
+ * Purpose: This activity allows the user to enter information about a new beverage they have purchased. Product name, product type, location name, and location type are all required by the user.
+ *
+ * Algorithm:
+ *      Retrieve information from all fields required by the user and any that are optional.
+ *      Create a new marker object with that information, and the latitude and longitude from the maps activity.
+ *      Add all information from that marker using its rowID (based off of the size of the database) to the database.
+ *      When user hits the add button, add a new marker with all of the entered information to the map itself.
+ *
+ *************************************************************************************************/
 public class SurveyActivity extends Activity {
 
     private RadioGroup ltypeRG;

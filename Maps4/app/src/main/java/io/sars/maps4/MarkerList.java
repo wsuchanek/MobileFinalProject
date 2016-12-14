@@ -8,13 +8,18 @@ import android.util.Log;
 
 import java.util.ArrayList;
 
-/**
- * Created by NicoleLane on 12/13/16.
- */
+/*************************************************************************************************
+ * File:   MarkerList.java
+ * Author: Nicole Lane, Will Suchanek
+ *
+ * Purpose: This object opens the database and creates an array of Strings using all of the information stored for each entry. This is used
+ * in the BevFragment and ListView files in order to create a scrollable listview.
+ *
+ *************************************************************************************************/
 
 public class MarkerList {
-    public String[] data;
-    DBAdapter database;
+    public String[] data; //Array of strings; from database
+    DBAdapter database; //Pointer to current database
 
     public MarkerList (Context context) {
 
@@ -23,6 +28,7 @@ public class MarkerList {
 
     }
 
+    //initialize the array of strings
     public void init () {
         database.open(); //open the database
         int size = database.getProfilesCount();
