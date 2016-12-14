@@ -35,7 +35,8 @@ public class MenuActivity extends Activity {
         startActivity(aboutIntent);
     }
     public void toListView(View view){
-
+        Intent listIntent = new Intent(this, ListActivity.class);
+        startActivity(listIntent);
     }
     public void goBacktoMap(View view){finish();}
 }
