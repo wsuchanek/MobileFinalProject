@@ -2,8 +2,12 @@ package io.sars.maps4;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.location.Location;
+import android.preference.PreferenceManager;
+import android.renderscript.Double2;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
@@ -21,11 +25,12 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
 
 public class MapsActivity extends FragmentActivity implements GoogleMap.OnMyLocationButtonClickListener,
         OnMapReadyCallback, GoogleMap.OnMapClickListener,
         ActivityCompat.OnRequestPermissionsResultCallback,
-        GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
+        GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, GoogleMap.OnMarkerClickListener {
 
     /**
      * Request code for location permission request.
@@ -45,6 +50,8 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMyLoca
     private String mLatitudeText;
     private String mLongitudeText;
 
+    DBAdapter database;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +60,7 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMyLoca
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
 
         // Create an instance of GoogleAPIClient.
         // This is necessary to connect to Google services such as maps
@@ -88,8 +96,8 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMyLoca
             Log.v("onResumeFragments", "Permission was denied");
             mPermissionDenied = false;
         }
+        //setMap();
     }
-
 
 
     /**
@@ -104,12 +112,11 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMyLoca
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-
+        mMap.setOnMarkerClickListener(this);
         // Add a marker in Sydney and move the camera
         // LatLng sydney = new LatLng(-34, 151);
         // mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         // mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
-
         mMap.setOnMyLocationButtonClickListener(this);
         mMap.setOnMapClickListener(this);
         enableMyLocation();
@@ -156,9 +163,20 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMyLoca
         // (the camera animates to the user's current position).
         Log.v("MapsActivity:", "Map click detected");
         // Add a marker in Sydney and move the camera
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return false;
+        }
         Location mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
         //LatLng sydney = new LatLng(-34, 151);
         LatLng myLoc = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
+        //mMap.clear();
         mMap.addMarker(new MarkerOptions().position(myLoc).title("You are here!"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(myLoc));
         return false;
@@ -172,6 +190,16 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMyLoca
      */
     @Override
     public void onConnected(Bundle connectionHint) {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
         mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
         if (mLastLocation != null) {
             mLatitudeText = String.valueOf(mLastLocation.getLatitude());
@@ -248,6 +276,164 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMyLoca
     public void toPreference(View view){
         Intent i = new Intent(this, MyPreferenceActivity.class);
         startActivity(i);
+
     }
 
+    public void setMap(View view){
+        mMap.clear();
+        SharedPreferences SP = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        String ptypePref = SP.getString("ptypePref", "1");
+        Toast.makeText(this, ptypePref, Toast.LENGTH_SHORT).show();
+        String ltypePref = SP.getString("ltypePref", "1");
+        Toast.makeText(this, ltypePref, Toast.LENGTH_SHORT).show();
+        if (ptypePref.equals("1")) {
+            displayAll(ltypePref);
+        } else if (ptypePref.equals("2")){
+            displayBeer(ltypePref);
+        } else{
+            displayWine(ltypePref);
+        }
+        /* This is now called in functions to filter what is displayed
+        for (int n = 1; n <= totalProducts; n++) {
+            Cursor c = database.getProduct(n);
+
+
+
+            //Toast.makeText(this, Double.toString(c.getDouble(5)), Toast.LENGTH_SHORT).show();
+            LatLng myLoc = new LatLng(c.getDouble(5), c.getDouble(6));
+            String title = "product type: " + c.getString(1) + "\n" +
+                    "location name: " + c.getString(2) + "\n" +
+                    "location type:  " + c.getString(3) + "\n";
+            if (c.getDouble(4)!= -1.00){
+                title+="Price: "+ Double.toString(c.getDouble(4))+ "\n";
+            }
+            if (c.getString(7).equals("") == false){
+                title+="Additional Info: \n"+c.getString(7);
+            }
+            //Toast.makeText(this, title, Toast.LENGTH_SHORT).show();
+            mMap.addMarker(new MarkerOptions().position(myLoc).title(c.getString(0)).snippet(title));
+        }*/
+    }
+
+    public void displayAll(String ltp){
+        Toast.makeText(this, "Display All", Toast.LENGTH_SHORT).show();
+        displayBeer(ltp);
+        displayWine(ltp);
+    }
+    public void displayBeer(String ltp){
+        database = new DBAdapter(this);
+        database.open();
+        int totalProducts = database.getProfilesCount();
+        for (int n = 1; n <= totalProducts; n++) {
+            Cursor c = database.getProduct(n);
+
+            if (c.getString(1).equals("Beer")){
+                if (ltp.equals("3")){
+                    Toast.makeText(this, "Beer Shop", Toast.LENGTH_SHORT).show();
+                    if (c.getString(3).equals("Shop")){
+                        LatLng myLoc = new LatLng(c.getDouble(5), c.getDouble(6));
+                        String title = "Product Name: "+ c.getString(0) + "\n"+
+                                "product type: " + c.getString(1) + "\n" +
+                                "location name: " + c.getString(2) + "\n" +
+                                "location type:  " + c.getString(3) + "\n";
+                        if (c.getDouble(4)!= -1.00){title+="Price: "+ Double.toString(c.getDouble(4))+ "\n";}
+                        if (!c.getString(7).equals("")){title+="Additional Info: \n"+c.getString(7);}
+
+                        mMap.addMarker(new MarkerOptions().position(myLoc).title(c.getString(0)).snippet(title));
+                    }
+
+                }else if(ltp.equals("2")) {
+                    Toast.makeText(this, "Beer Bar", Toast.LENGTH_SHORT).show();
+                    if(c.getString(3).equals("Bar")){
+                        LatLng myLoc = new LatLng(c.getDouble(5), c.getDouble(6));
+                        String title = "Product Name: "+ c.getString(0) + "\n"+
+                                "product type: " + c.getString(1) + "\n" +
+                                "location name: " + c.getString(2) + "\n" +
+                                "location type:  " + c.getString(3) + "\n";
+                        if (c.getDouble(4)!= -1.00){title+="Price: "+ Double.toString(c.getDouble(4))+ "\n";}
+                        if (!c.getString(7).equals("")){title+="Additional Info: \n"+c.getString(7);}
+
+                        mMap.addMarker(new MarkerOptions().position(myLoc).title(c.getString(0)).snippet(title));
+
+                    }
+
+                } else{
+                    Toast.makeText(this, "Beer All", Toast.LENGTH_SHORT).show();
+                    LatLng myLoc = new LatLng(c.getDouble(5), c.getDouble(6));
+                    String title = "Product Name: "+ c.getString(0) + "\n"+
+                            "product type: " + c.getString(1) + "\n" +
+                            "location name: " + c.getString(2) + "\n" +
+                            "location type:  " + c.getString(3) + "\n";
+                    if (c.getDouble(4)!= -1.00){title+="Price: "+ Double.toString(c.getDouble(4))+ "\n";}
+                    if (!c.getString(7).equals("")){title+="Additional Info: \n"+c.getString(7);}
+
+                    mMap.addMarker(new MarkerOptions().position(myLoc).title(c.getString(0)).snippet(title));
+                }
+            }
+        }
+        database.close();
+    }
+
+    public void displayWine(String ltp){
+        database = new DBAdapter(this);
+        database.open();
+        int totalProducts = database.getProfilesCount();
+        Toast.makeText(this, Integer.toString(totalProducts), Toast.LENGTH_SHORT).show();
+        for (int n = 1; n <= totalProducts; n++) {
+
+            Cursor c = database.getProduct(n);
+            Toast.makeText(this, Integer.toString(n)+" "+c.getString(1)+" "+ltp+" "+c.getString(3), Toast.LENGTH_SHORT).show();
+            if (c.getString(1).equals("Wine")){
+                if (ltp.equals("3")){
+                    Toast.makeText(this, "Wine Shop", Toast.LENGTH_SHORT).show();
+                    if (c.getString(3).equals("Shop")){
+                        LatLng myLoc = new LatLng(c.getDouble(5), c.getDouble(6));
+                        String title = "Product Name: "+ c.getString(0) + "\n"+
+                                "product type: " + c.getString(1) + "\n" +
+                                "location name: " + c.getString(2) + "\n" +
+                                "location type:  " + c.getString(3) + "\n";
+                        if (c.getDouble(4)!= -1.00){title+="Price: "+ Double.toString(c.getDouble(4))+ "\n";}
+                        if (!c.getString(7).equals("")){title+="Additional Info: \n"+c.getString(7);}
+
+                        mMap.addMarker(new MarkerOptions().position(myLoc).title(c.getString(0)).snippet(title));
+                    }
+
+                }else if(ltp.equals("2")) {
+                    Toast.makeText(this, "Wine Bar", Toast.LENGTH_SHORT).show();
+                    if(c.getString(3).equals("Bar")){
+                        LatLng myLoc = new LatLng(c.getDouble(5), c.getDouble(6));
+                        String title = "Product Name: "+ c.getString(0) + "\n"+
+                                "product type: " + c.getString(1) + "\n" +
+                                "location name: " + c.getString(2) + "\n" +
+                                "location type:  " + c.getString(3) + "\n";
+                        if (c.getDouble(4)!= -1.00){title+="Price: "+ Double.toString(c.getDouble(4))+ "\n";}
+                        if (!c.getString(7).equals("")){title+="Additional Info: \n"+c.getString(7);}
+
+                        mMap.addMarker(new MarkerOptions().position(myLoc).title(c.getString(0)).snippet(title));
+
+                    }
+
+                } else{
+                    Toast.makeText(this, "Wine All", Toast.LENGTH_SHORT).show();
+                    LatLng myLoc = new LatLng(c.getDouble(5), c.getDouble(6));
+                    String title = "Product Name: "+ c.getString(0) + "\n"+
+                            "product type: " + c.getString(1) + "\n" +
+                            "location name: " + c.getString(2) + "\n" +
+                            "location type:  " + c.getString(3) + "\n";
+                    if (c.getDouble(4)!= -1.00){title+="Price: "+ Double.toString(c.getDouble(4))+ "\n";}
+                    if (!c.getString(7).equals("")){title+="Additional Info: \n"+c.getString(7);}
+
+                    mMap.addMarker(new MarkerOptions().position(myLoc).title(c.getString(0)).snippet(title));
+                }
+            }
+        }
+        database.close();
+    }
+
+    @Override
+    public boolean onMarkerClick(com.google.android.gms.maps.model.Marker marker) {
+        String toToast = marker.getSnippet();
+        Toast.makeText(this, toToast, Toast.LENGTH_LONG).show();
+        return false;
+    }
 }
