@@ -16,7 +16,7 @@
     <Button
         android:layout_width="175dp"
         android:layout_height="60dp"
-        android:text="Show Nearby in List"
+        android:text="All Product List"
         android:id="@+id/button2"
         android:onClick="toListView"
         android:layout_above="@+id/button"

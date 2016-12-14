@@ -2,9 +2,9 @@
 <resources>
     <!--Color array-->
     <string-array name="listArray">
+        <item>Cabernet</item>
+        <item>Hunter Green</item>
         <item>White</item>
-        <item>Blue</item>
-        <item>Green</item>
     </string-array>
 
     <string-array name="listValues">

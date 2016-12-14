@@ -1,7 +1,10 @@
 package io.sars.maps4;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.support.v4.content.ContextCompat;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.view.View;
@@ -50,6 +53,20 @@ public class SurveyActivity extends Activity {
         pnameET.setText("");
         additionalET.setText("");
         priceET.setText("0");
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        SharedPreferences SP = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        String bgColor = SP.getString("bgColor","1");
+        if (bgColor.equals("1")){
+            getWindow().getDecorView().setBackgroundColor(ContextCompat.getColor(SurveyActivity.this, R.color.cabernet));
+        } else if (bgColor.equals("2")){
+            getWindow().getDecorView().setBackgroundColor(ContextCompat.getColor(SurveyActivity.this, R.color.green));
+        }else{
+            getWindow().getDecorView().setBackgroundColor(ContextCompat.getColor(SurveyActivity.this, R.color.white));
+        }
     }
 
     /*************************************************************************************************
@@ -125,9 +142,9 @@ public class SurveyActivity extends Activity {
 
 
 
-        Toast.makeText(this, marker.getPname()+"|"+marker.getLname()+"|"+marker.getPtype()+"|"+marker.getLtype(), Toast.LENGTH_LONG).show();
-        if (marker.getLname() != "" && marker.getPname() != "" && marker.getPtype() != "" && marker.getLtype() != "") {
-            Toast.makeText(this, "Adding to database.", Toast.LENGTH_LONG).show();
+        //Toast.makeText(this, marker.getPname()+"|"+marker.getLname()+"|"+marker.getPtype()+"|"+marker.getLtype(), Toast.LENGTH_LONG).show();
+        if (!marker.getLname().equals("") && !marker.getPname().equals("") && !marker.getPtype().equals("") && !marker.getLtype().equals("")) {
+            //Toast.makeText(this, "Adding to database.", Toast.LENGTH_LONG).show();
             
             database.open(); //open the database
             long id;
@@ -145,10 +162,11 @@ public class SurveyActivity extends Activity {
 
             //---retrieve the same title to verify---
             Cursor c = database.getProduct(marker.getRowID());
-            if (c.moveToFirst())
-              displayProduct(c);
+            if (c.moveToFirst()) {
+                displayProduct(c);
+            }
             else
-                Toast.makeText(this, "No title found",Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "No Product found. Not adding.",Toast.LENGTH_LONG).show();
             //-------------------
             database.close(); //Close it once information has been entered
             c.close();
@@ -161,15 +179,9 @@ public class SurveyActivity extends Activity {
 
     public void displayProduct(Cursor c)
     {
-        Toast.makeText(this,
-                "product name: " + c.getString(0) + "\n" +
-                        "product type: " + c.getString(1) + "\n" +
-                        "location name: " + c.getString(2) + "\n" +
-                        "location type:  " + c.getString(3) + "\n" +
-                        "price:   " + c.getDouble(4) + "\n" +
-                        "latitude:   " + c.getDouble(5) + "\n" +
-                        "longitude:   " + c.getDouble(6) + "\n" +
-                        "extras:    " +  c.getString(7),
+        Toast.makeText(this,"Item added to database:\n"+
+                "Product Name: " + c.getString(0) + "\n" +
+                        "Location Name: " + c.getString(2) + "\n",
                 Toast.LENGTH_LONG).show();
     }
 

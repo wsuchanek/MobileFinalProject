@@ -12,12 +12,15 @@
     <string name="price">Price:</string>
     <string name="name">Name of Product: *</string>
     <string name="name2">Name of Location: *</string>
-    <string name="borw"> Is it Beer or Wine?*</string>
-    <string name="bors">Is it at a Bar or Shop?*</string>
+    <string name="borw"> Is it Beer or Wine? *</string>
+    <string name="bors">Is it at a Bar or Shop? *</string>
     <string name="additional">Additional Information:</string>
     <string name="place">Place Marker</string>
-    <string name="about">About stuff here</string>
+    <string name="about">What:\n Our app aims at allowing you to track the unique types of alcohol you like, and where you can find them! \n\nHow:\n Click \'Add Marker\', type in the required information and then update your map to display a pin in that location!
+    \n\nWhat else?\n You can go into your preferences to update whether or not you only want to see bars or shops, and also if you would rather it display beer, wine or both! \n
+    \nFAQ:\nDo I have to be at a location in order to add a pin?\nCurrently yes, but if John Barr really wants, we can add this feature.\n\nWho made this awesome app?\nNicole Lane &amp; Will Suchanek</string>
     <string name="back">Back</string>
     <string name="btmap">Back to Map</string>
+    <string name="thanku">Thanks for Using our App!</string>
 
 </resources>

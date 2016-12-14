@@ -96,7 +96,7 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMyLoca
             Log.v("onResumeFragments", "Permission was denied");
             mPermissionDenied = false;
         }
-        //setMap();
+        Toast.makeText(this, "Press Update Map!", Toast.LENGTH_SHORT).show();
     }
 
 
@@ -128,7 +128,7 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMyLoca
      */
     @Override
     public void onMapClick(LatLng point) {
-        Toast.makeText(this, "Map clicked", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "Map clicked", Toast.LENGTH_SHORT).show();
         Log.v("DEBUG", "Map clicked [" + point.latitude + " / " + point.longitude + "]");
         //Do your stuff with LatLng here
         //Then pass LatLng to other activity
@@ -283,9 +283,9 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMyLoca
         mMap.clear();
         SharedPreferences SP = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         String ptypePref = SP.getString("ptypePref", "1");
-        Toast.makeText(this, ptypePref, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, ptypePref, Toast.LENGTH_SHORT).show();
         String ltypePref = SP.getString("ltypePref", "1");
-        Toast.makeText(this, ltypePref, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, ltypePref, Toast.LENGTH_SHORT).show();
         if (ptypePref.equals("1")) {
             displayAll(ltypePref);
         } else if (ptypePref.equals("2")){
@@ -316,7 +316,7 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMyLoca
     }
 
     public void displayAll(String ltp){
-        Toast.makeText(this, "Display All", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "Display All", Toast.LENGTH_SHORT).show();
         displayBeer(ltp);
         displayWine(ltp);
     }
@@ -329,13 +329,13 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMyLoca
 
             if (c.getString(1).equals("Beer")){
                 if (ltp.equals("3")){
-                    Toast.makeText(this, "Beer Shop", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(this, "Beer Shop", Toast.LENGTH_SHORT).show();
                     if (c.getString(3).equals("Shop")){
                         LatLng myLoc = new LatLng(c.getDouble(5), c.getDouble(6));
                         String title = "Product Name: "+ c.getString(0) + "\n"+
-                                "product type: " + c.getString(1) + "\n" +
-                                "location name: " + c.getString(2) + "\n" +
-                                "location type:  " + c.getString(3) + "\n";
+                                "Product Type: " + c.getString(1) + "\n" +
+                                "Location Name: " + c.getString(2) + "\n" +
+                                "Location Type:  " + c.getString(3) + "\n";
                         if (c.getDouble(4)!= -1.00){title+="Price: "+ Double.toString(c.getDouble(4))+ "\n";}
                         if (!c.getString(7).equals("")){title+="Additional Info: \n"+c.getString(7);}
 
@@ -343,13 +343,13 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMyLoca
                     }
 
                 }else if(ltp.equals("2")) {
-                    Toast.makeText(this, "Beer Bar", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(this, "Beer Bar", Toast.LENGTH_SHORT).show();
                     if(c.getString(3).equals("Bar")){
                         LatLng myLoc = new LatLng(c.getDouble(5), c.getDouble(6));
                         String title = "Product Name: "+ c.getString(0) + "\n"+
-                                "product type: " + c.getString(1) + "\n" +
-                                "location name: " + c.getString(2) + "\n" +
-                                "location type:  " + c.getString(3) + "\n";
+                                "Product Type: " + c.getString(1) + "\n" +
+                                "Location Name: " + c.getString(2) + "\n" +
+                                "Location Type:  " + c.getString(3) + "\n";
                         if (c.getDouble(4)!= -1.00){title+="Price: "+ Double.toString(c.getDouble(4))+ "\n";}
                         if (!c.getString(7).equals("")){title+="Additional Info: \n"+c.getString(7);}
 
@@ -358,12 +358,12 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMyLoca
                     }
 
                 } else{
-                    Toast.makeText(this, "Beer All", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(this, "Beer All", Toast.LENGTH_SHORT).show();
                     LatLng myLoc = new LatLng(c.getDouble(5), c.getDouble(6));
                     String title = "Product Name: "+ c.getString(0) + "\n"+
-                            "product type: " + c.getString(1) + "\n" +
-                            "location name: " + c.getString(2) + "\n" +
-                            "location type:  " + c.getString(3) + "\n";
+                            "Product Type: " + c.getString(1) + "\n" +
+                            "Location Name: " + c.getString(2) + "\n" +
+                            "Location Type:  " + c.getString(3) + "\n";
                     if (c.getDouble(4)!= -1.00){title+="Price: "+ Double.toString(c.getDouble(4))+ "\n";}
                     if (!c.getString(7).equals("")){title+="Additional Info: \n"+c.getString(7);}
 
@@ -378,20 +378,20 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMyLoca
         database = new DBAdapter(this);
         database.open();
         int totalProducts = database.getProfilesCount();
-        Toast.makeText(this, Integer.toString(totalProducts), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, Integer.toString(totalProducts), Toast.LENGTH_SHORT).show();
         for (int n = 1; n <= totalProducts; n++) {
 
             Cursor c = database.getProduct(n);
-            Toast.makeText(this, Integer.toString(n)+" "+c.getString(1)+" "+ltp+" "+c.getString(3), Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, Integer.toString(n)+" "+c.getString(1)+" "+ltp+" "+c.getString(3), Toast.LENGTH_SHORT).show();
             if (c.getString(1).equals("Wine")){
                 if (ltp.equals("3")){
-                    Toast.makeText(this, "Wine Shop", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(this, "Wine Shop", Toast.LENGTH_SHORT).show();
                     if (c.getString(3).equals("Shop")){
                         LatLng myLoc = new LatLng(c.getDouble(5), c.getDouble(6));
                         String title = "Product Name: "+ c.getString(0) + "\n"+
-                                "product type: " + c.getString(1) + "\n" +
-                                "location name: " + c.getString(2) + "\n" +
-                                "location type:  " + c.getString(3) + "\n";
+                                "Product Type: " + c.getString(1) + "\n" +
+                                "Location Name: " + c.getString(2) + "\n" +
+                                "Location Type:  " + c.getString(3) + "\n";
                         if (c.getDouble(4)!= -1.00){title+="Price: "+ Double.toString(c.getDouble(4))+ "\n";}
                         if (!c.getString(7).equals("")){title+="Additional Info: \n"+c.getString(7);}
 
@@ -399,13 +399,13 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMyLoca
                     }
 
                 }else if(ltp.equals("2")) {
-                    Toast.makeText(this, "Wine Bar", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(this, "Wine Bar", Toast.LENGTH_SHORT).show();
                     if(c.getString(3).equals("Bar")){
                         LatLng myLoc = new LatLng(c.getDouble(5), c.getDouble(6));
                         String title = "Product Name: "+ c.getString(0) + "\n"+
-                                "product type: " + c.getString(1) + "\n" +
-                                "location name: " + c.getString(2) + "\n" +
-                                "location type:  " + c.getString(3) + "\n";
+                                "Product Type: " + c.getString(1) + "\n" +
+                                "Location Name: " + c.getString(2) + "\n" +
+                                "Location Type:  " + c.getString(3) + "\n";
                         if (c.getDouble(4)!= -1.00){title+="Price: "+ Double.toString(c.getDouble(4))+ "\n";}
                         if (!c.getString(7).equals("")){title+="Additional Info: \n"+c.getString(7);}
 
@@ -414,12 +414,12 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMyLoca
                     }
 
                 } else{
-                    Toast.makeText(this, "Wine All", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(this, "Wine All", Toast.LENGTH_SHORT).show();
                     LatLng myLoc = new LatLng(c.getDouble(5), c.getDouble(6));
                     String title = "Product Name: "+ c.getString(0) + "\n"+
-                            "product type: " + c.getString(1) + "\n" +
-                            "location name: " + c.getString(2) + "\n" +
-                            "location type:  " + c.getString(3) + "\n";
+                            "Product Type: " + c.getString(1) + "\n" +
+                            "Location Name: " + c.getString(2) + "\n" +
+                            "Location Type:  " + c.getString(3) + "\n";
                     if (c.getDouble(4)!= -1.00){title+="Price: "+ Double.toString(c.getDouble(4))+ "\n";}
                     if (!c.getString(7).equals("")){title+="Additional Info: \n"+c.getString(7);}
 

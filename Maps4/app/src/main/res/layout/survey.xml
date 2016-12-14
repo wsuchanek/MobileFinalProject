@@ -7,23 +7,24 @@
     android:nestedScrollingEnabled="false">
 
     <ImageView
-        android:layout_width="212dp"
-        android:layout_height="69dp"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
         android:id="@+id/wine_and_beer"
         android:layout_gravity="center_horizontal"
         android:src="@drawable/alcohols"
         android:layout_weight="0.19"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentEnd="false" />
 
     <RadioGroup
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:id="@+id/beerorwine"
-        android:layout_alignParentTop="true"
+        android:layout_above="@+id/borsTV"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="114dp">
+        android:layout_marginBottom="4dp">
 
         <RadioButton
             android:layout_width="90dp"
@@ -45,23 +46,23 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:id="@+id/barorshop"
+        android:layout_marginBottom="25dp"
         android:layout_above="@+id/pname"
-        android:layout_alignStart="@+id/beerorwine"
-        android:layout_marginBottom="26dp">
+        android:layout_centerHorizontal="true">
 
         <RadioButton
-            android:layout_width="90dp"
+            android:layout_width="170dp"
             android:layout_height="wrap_content"
             android:text="@string/shop"
             android:id="@+id/shop"
-             />
+            android:textAlignment="center" />
 
         <RadioButton
-            android:layout_width="90dp"
+            android:layout_width="170dp"
             android:layout_height="wrap_content"
             android:text="@string/bar"
             android:id="@+id/bar"
-            />
+            android:textAlignment="center" />
     </RadioGroup>
 
     <TextView
@@ -71,9 +72,8 @@
         android:text="@string/borw"
         android:id="@+id/borwTV"
         android:textSize="20dp"
-        android:layout_below="@+id/wine_and_beer"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp" />
+        android:layout_above="@+id/beerorwine"
+        android:layout_alignStart="@+id/barorshop" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -93,8 +93,8 @@
         android:id="@+id/pname"
         android:textSize="18dp"
         android:layout_centerVertical="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="21dp" />
+        android:layout_alignEnd="@+id/price"
+        android:layout_marginEnd="29dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -103,9 +103,9 @@
         android:text="@string/name2"
         android:id="@+id/lname"
         android:textSize="18dp"
-        android:layout_alignTop="@+id/pname"
-        android:layout_toEndOf="@+id/price"
-        android:textIsSelectable="false" />
+        android:textIsSelectable="false"
+        android:layout_above="@+id/pnameET"
+        android:layout_toEndOf="@+id/pname" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -154,14 +154,13 @@
         android:layout_toEndOf="@+id/price" />
 
     <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="400dp"
         android:layout_height="wrap_content"
         android:inputType="textMultiLine"
         android:ems="10"
         android:id="@+id/additionalET"
         android:layout_below="@+id/additional"
-        android:layout_alignEnd="@+id/lnameET"
-        android:layout_alignParentStart="true" />
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="wrap_content"

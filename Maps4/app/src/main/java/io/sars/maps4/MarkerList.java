@@ -37,9 +37,6 @@ public class MarkerList {
                 }
             }
         }
-        else {
-            data[0] = "No beverages recorded.";
-        }
 
         database.close(); //Close it once information has been entered
     }
@@ -47,13 +44,18 @@ public class MarkerList {
     //Return a string of information from the current spot in the database
     public String getString(Cursor c)
     {
+        String price = "$"+Double.toString(c.getDouble(4));
+        if (c.getDouble(4)== -1.0){
+            price = "Not Specified";
+        }
+
         //Spaces and tabs are for formatting purposes
         String temp = "Product Name:\t\t\t\t\t     " + c.getString(0) + "\n";
-        temp+= "Product Type:\t\t\t\t\t         " + c.getString(1) + "\n";
+        temp+= "Product Type:\t\t\t\t\t     " + c.getString(1) + "\n";
         temp += "Location Name:\t\t\t\t\t     " + c.getString(2) + "\n";
-        temp += "Location Type:\t\t\t\t\t       " + c.getString(3) + "\n";
-        temp += "Price:\t\t\t\t\t                       $" + Double.toString(c.getDouble(4)) + "\n";
-        temp+= "Extra Information:\t\t\t\t  " + c.getString(7);
+        temp += "Location Type:\t\t\t\t\t     " + c.getString(3) + "\n";
+        temp += "Price:\t\t\t\t\t                         " + price + "\n";
+        temp+= "Extra Information:\t\t\t\t      " + c.getString(7);
 
         return temp;
 

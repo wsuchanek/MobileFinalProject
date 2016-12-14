@@ -11,20 +11,33 @@
         android:layout_centerHorizontal="true" />
 
     <TextView
-        android:layout_width="300dp"
+        android:layout_width="wrap_content"
         android:layout_height="300dp"
         android:text="@string/about"
         android:id="@+id/textView"
-        android:textSize="14dp"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:textSize="20dp"
+        android:layout_below="@+id/thankview"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/button4"
+        android:textAlignment="center" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/back"
         android:id="@+id/button4"
-        android:layout_below="@+id/textView"
+        android:onClick="goBack"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/thanku"
+        android:id="@+id/thankview"
+        android:layout_below="@+id/imageView"
         android:layout_centerHorizontal="true"
-        android:onClick="goBack" />
+        android:textSize="36dp"
+        android:textAlignment="center" />
 </RelativeLayout>

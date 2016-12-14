@@ -2,7 +2,10 @@ package io.sars.maps4;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 
 import java.net.Inet4Address;
@@ -22,6 +25,21 @@ public class MenuActivity extends Activity {
         lat = intent.getStringExtra("latitude");
         longitude = intent.getStringExtra("longitude");
 
+
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        SharedPreferences SP = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        String bgColor = SP.getString("bgColor","1");
+        if (bgColor.equals("1")){
+            getWindow().getDecorView().setBackgroundColor(ContextCompat.getColor(MenuActivity.this, R.color.cabernet));
+        } else if (bgColor.equals("2")){
+            getWindow().getDecorView().setBackgroundColor(ContextCompat.getColor(MenuActivity.this, R.color.green));
+        }else{
+            getWindow().getDecorView().setBackgroundColor(ContextCompat.getColor(MenuActivity.this, R.color.white));
+        }
     }
 
     public void toSurvey(View view){
